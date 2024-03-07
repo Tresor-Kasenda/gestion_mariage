@@ -50,14 +50,4 @@ class Candidat extends Model
     {
         return $this->hasOne(Mariage::class, 'marier_id');
     }
-
-    public function temoins(): \Illuminate\Database\Eloquent\Relations\HasMany
-    {
-        return $this->hasMany(Temoin::class);
-    }
-
-    public function temoinsAvec(): \Illuminate\Database\Eloquent\Relations\HasMany
-    {
-        return $this->hasMany(Temoin::class, 'candidat_id');
-    }
 }

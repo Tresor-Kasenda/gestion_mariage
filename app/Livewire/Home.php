@@ -22,7 +22,6 @@ class Home extends Component
             'results' => Candidat::query()
                 ->where('name', 'like', "%{$this->search}%")
                 ->orWhere('prenom', 'like', "%{$this->search}%")
-                ->orWhere('date_naissance', 'like', "%{$this->search}%")
                 ->orWhere('id_carte_electeur', 'like', "%{$this->search}%")
                 ->paginate(9)
         ]);

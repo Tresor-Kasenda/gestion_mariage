@@ -13,6 +13,7 @@ class ListsCandidats extends Component
     public function mount(): void
     {
         $this->candidats = Candidat::query()
+            ->with(['commune', 'marierAvec'])
             ->orderBy('created_at', 'desc')
             ->whereHas('commune', function ($query) {
                 $query->where('id', auth()->user()->commune_id);

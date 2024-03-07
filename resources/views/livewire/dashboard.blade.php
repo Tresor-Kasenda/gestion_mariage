@@ -18,18 +18,19 @@
                     />
                 </div>
             </div>
+
             @if($search !==null)
                 <div class="bg-slate-50 p-6 shadow rounded">
                     <section class="w-fit mx-auto grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 justify-items-center justify-center gap-y-20 gap-x-14 mt-10 mb-5">
                         @foreach($results as $key => $result)
-                            <div wire:key="{{ $key }}" class="w-72 bg-white shadow-md rounded-xl duration-500">
+                            <div wire:key="{{ $key }}" class="w-80 bg-white shadow-md rounded-xl duration-500">
                                 <a href="{{ route('candidat-show', $result->id) }}" wire:navigate>
                                     <img
                                         src="{{ asset('storage/', $result->photo) }}"
                                         alt="{{ $result->name }}"
                                         class="h-60 w-42 object-cover rounded-t-xl"
                                     />
-                                    <div class="px-4 py-3 w-72 space-y-2">
+                                    <div class="px-4 py-3 w-80 space-y-2">
                                     <span class="font-semibold mr-3 uppercase text-xs flex items-center space-x-4">
                                         <svg  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-slate-400 hover:text-slate-600 duration-300">
                                           <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z" />
@@ -49,6 +50,10 @@
                                             <span class="text-lg font-semibold text-black cursor-auto">
                                             {{ $result->id_carte_electeur }}
                                         </span>
+                                        <p class="space-x-2 bg-red-400 py-1 px-2 rounded-full">
+                                            <span class="text-xs text-center justify-items-center text-white cursor-auto">
+                                                Marié a la commune : {{ $result->commune->name }}
+                                            </span>
                                         </p>
                                     </div>
                                 </a>

@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Hash;
 use function Laravel\Prompts\password;
+use function Laravel\Prompts\search;
 use function Laravel\Prompts\select;
 use function Laravel\Prompts\text;
 
@@ -46,11 +47,16 @@ class CreateUserCommand extends Command
             validate: fn (string $value) => filter_var($value, FILTER_VALIDATE_EMAIL) ? null : 'The email is not valid.'
         );
 
-        $commune = select(
-            label: 'Which category would you like to assign?',
-            options: Commune::pluck('name', 'id'),
-            scroll: 10
+        $data = search(
+            'Quelle est votre commune?',
+            fn (string $value) => strlen($value) > 0
+                ? Commune::where('name', 'like', "%{$value}%")->pluck('name', 'id')->toArray()
+                : []
         );
+
+        $commune = Commune::query()
+            ->where('name', '=', $data)
+            ->first();
 
         $password = password(
             label: 'What is your password?',
@@ -67,7 +73,7 @@ class CreateUserCommand extends Command
                 'email' => $email,
                 'password' => Hash::make($password),
                 'is_admin' => true,
-                'commune_id' => $commune
+                'commune_id' => $commune->id
             ]);
 
         $this->info('💥🍀 Uitilisateur cree avec success!..❤💚💝💥🍀');

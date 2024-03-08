@@ -3,6 +3,9 @@
 namespace App\Livewire\Pages\Candidats;
 
 use App\Models\Candidat;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\View\View;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 #[Layout('layouts.app')]
@@ -20,7 +23,7 @@ class ListsCandidats extends Component
             })
             ->get();
     }
-    public function render(): \Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View|\Illuminate\Contracts\Foundation\Application
+    public function render(): \Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|Factory|View|Application
     {
         return view('livewire.pages.candidats.lists-candidats');
     }

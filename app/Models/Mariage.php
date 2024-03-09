@@ -13,7 +13,7 @@ class Mariage extends Model
     protected $fillable = [
         'date_mariage',
         'candidat_id',
-        'conjoint_id',
+        'femme_id',
     ];
 
     protected $casts = [
@@ -25,8 +25,8 @@ class Mariage extends Model
         return $this->belongsTo(Candidat::class);
     }
 
-    public function conjoint(): BelongsTo
+    public function femme(): BelongsTo
     {
-        return $this->belongsTo(Mariage::class);
+        return $this->belongsTo(Femme::class, 'femme_id');
     }
 }

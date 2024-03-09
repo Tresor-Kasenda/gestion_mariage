@@ -22,27 +22,10 @@ class ShowCandidat extends Component
 
     public function results()
     {
-        $candidat = Candidat::find($this->candidat);
-        $conjoint = [];
-        $conjointe = [];
-
-        if ($candidat->gender === 'Homme') {
-            $conjoint[] = Mariage::where('candidat_id', $candidat->id)->first()->conjoint;
-        }
-
-        if ($candidat->gender === 'Femme') {
-            $conjointe[] = Mariage::where('conjoint_id', $candidat->id)->first()->candidat;
-        }
-
-        dd(
-            $candidat,
-            $conjoint,
-            $conjointe
-        );
-
-        return [
-            'candidat' => $candidat,
-            'mariage' => $mariage
-        ];
+        // get the candidat by id and relationship with mariage and femme
+        return Candidat::query()
+            ->with(['mariage', 'mariage.femme'])
+            ->where('id', $this->candidat)
+            ->first();
     }
 }

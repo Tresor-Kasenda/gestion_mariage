@@ -53,10 +53,18 @@
                 <thead class="ltr:text-left rtl:text-right">
                 <tr>
                     <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Photo</th>
-                    <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Nom</th>
-                    <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Prenon</th>
-                    <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Date de naissance</th>
-                    <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">ID Carte Electeur</th>
+                    <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                        <a href="#" wire:click.prevent="sortBy('name')">Nom</a>
+                    </th>
+                    <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                        <a href="#" wire:click.prevent="sortBy('prenon')">Prenom</a>
+                    </th>
+                    <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                        <a href="#" wire:click.prevent="sortBy('date_naissance')">Date de naissance</a>
+                    </th>
+                    <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                        <a href="#" wire:click.prevent="sortBy('id_carte_electeur')">Numero de carte</a>
+                    </th>
                     <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Actions</th>
                 </tr>
                 </thead>
@@ -73,7 +81,7 @@
                             <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">{{$candidat->name}}</td>
                             <td class="whitespace-nowrap px-4 py-2 text-gray-700">{{$candidat->prenon}}</td>
                             <td class="whitespace-nowrap px-4 py-2 text-gray-700">{{$candidat->date_naissance->format('Y-m-d')}}</td>
-                            <td class="whitespace-nowrap px-4 py-2 text-gray-700">{{$candidat->id_carte_electeur}}</td>
+                            <td class="whitespace-nowrap px-4 py-2 text-gray-700">{{$candidat->id_carte_electeur ?? $candidat->carte_electeur}}</td>
                             <td class="whitespace-nowrap px-4 py-2">
                                 <a
                                     href="{{ route('candidat-show',$candidat->id) }}"

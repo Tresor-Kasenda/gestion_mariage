@@ -39,11 +39,6 @@ class Candidat extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function responsables(): HasOne
-    {
-        return $this->hasOne(Responsable::class);
-    }
-
     public function mariage(): HasOne
     {
         return $this->hasOne(Mariage::class);

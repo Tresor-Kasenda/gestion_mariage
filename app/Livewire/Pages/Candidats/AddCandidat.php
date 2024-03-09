@@ -99,7 +99,7 @@ class AddCandidat extends Component
         Mariage::query()
             ->create([
                 'candidat_id' => $marier->id,
-                'conjoint_id' => $marieer->id,
+                'femme_id' => $marieer->id,
                 'date_mariage' => $this->date_mariage,
             ]);
 

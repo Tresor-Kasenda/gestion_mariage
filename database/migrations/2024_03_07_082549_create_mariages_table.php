@@ -17,7 +17,6 @@ return new class extends Migration
             $table->foreignIdFor(\App\Models\Candidat::class)
                 ->constrained()
                 ->cascadeOnDelete();
-            $table->foreignId('marier_id');
             $table->timestamps();
         });
     }

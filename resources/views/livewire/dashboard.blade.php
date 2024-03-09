@@ -1,12 +1,12 @@
 <div>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Bienvenue {{ auth()->user()->name }} | <span class="bg-indigo-500 rounded-full px-3 py-1 text-white">Commune de {{ auth()->user()->commune->name }}</span>
+            Agent <span class="bg-indigo-100 px-4 py-1 rounded">{{ auth()->user()->name }}</span> | <span class="bg-indigo-500 rounded-full px-3 py-1 text-white">Commune de {{ auth()->user()->commune->name }}</span>
         </h2>
     </x-slot>
 
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
+        <div class="max-w-8xl mx-auto sm:px-6 lg:px-8 space-y-6">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     <x-text-input
@@ -21,14 +21,14 @@
 
             @if($search !==null)
                 <div class="bg-slate-50 p-6 shadow rounded">
-                    <section class="w-fit mx-auto grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 justify-items-center justify-center gap-y-20 gap-x-14 mt-10 mb-5">
+                    <section class="w-fit mx-auto grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 justify-items-center justify-center gap-y-20 gap-x-14 mt-10 mb-5">
                         @foreach($results as $key => $result)
                             <div wire:key="{{ $key }}" class="w-80 bg-white shadow-md rounded-xl duration-500">
                                 <a href="{{ route('candidat-show', $result->id) }}" wire:navigate>
                                     <img
-                                        src="{{ asset('storage/', $result->photo) }}"
+                                        src="{{ asset('storage/'.$result->photos) }}"
                                         alt="{{ $result->name }}"
-                                        class="h-60 w-42 object-cover rounded-t-xl"
+                                        class="size-60 object-cover rounded-t-xl aspect-auto"
                                     />
                                     <div class="px-4 py-3 w-80 space-y-2">
                                     <span class="font-semibold mr-3 uppercase text-xs flex items-center space-x-4">

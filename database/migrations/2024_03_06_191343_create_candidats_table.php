@@ -1,5 +1,6 @@
 <?php
 
+use App\Concers\GenderEnum;
 use App\Models\Commune;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
@@ -20,6 +21,10 @@ return new class extends Migration
             $table->date('date_naissance');
             $table->string('id_carte_electeur')->unique()->nullable();
             $table->string('photos')->nullable();
+            $table->enum('gender', [
+                GenderEnum::Homme->value,
+                GenderEnum::Femme->value]
+            )->default(GenderEnum::Homme->value);
             $table->foreignIdFor(Commune::class)
                 ->constrained()
                 ->cascadeOnDelete();

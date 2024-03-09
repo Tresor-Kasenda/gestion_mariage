@@ -1,11 +1,20 @@
 <div>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Bienvenue {{ auth()->user()->name }} | <span class="bg-indigo-500 rounded-full px-3 py-1 text-white">Commune de {{ auth()->user()->commune->name }}</span>
+            Agent <span class="bg-indigo-100 px-4 py-1 rounded">{{ auth()->user()->name }}</span> | <span class="bg-indigo-500 rounded-full px-3 py-1 text-white">Commune de {{ auth()->user()->commune->name }}</span>
         </h2>
     </x-slot>
 
     <div class="mx-auto max-w-7xl">
+        @if ($errors->any())
+            <div class="alert alert-danger mt-3">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <form wire:submit.prevent="storeCandidat" enctype="multipart/form-data">
             <div class="bg-white border rounded-lg shadow relative m-10">
                 <div class="flex items-start justify-between p-5 border-b rounded-t">
@@ -55,20 +64,20 @@
                                 required="">
                         </div>
                         <div class="col-span-6 sm:col-span-3">
-                            <label for="photo_marier" class="text-sm font-medium text-gray-900 block mb-2">
+                            <label for="carte_electeur" class="text-sm font-medium text-gray-900 block mb-2">
                                 N° Carte d'electeur du Marié
                             </label>
                             <input
                                 type="number"
-                                name="photo_marier"
-                                id="photo_marier"
-                                wire:model="photo_marier"
+                                name="carte_electeur"
+                                id="carte_electeur"
+                                wire:model="carte_electeur"
                                 class="shadow-sm bg-gray-50 border @error('date_mariage') border-red-400 @enderror border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
                                 placeholder="Saissir le numéro de la carte d'electeur du marié"
                                 required="">
                         </div>
-                        <div class="col-span-full">
-                            <label for="photo_marier" class="text-sm font-medium text-gray-900 block mb-2">
+                        <div class="col-span-6 sm:col-span-3">
+                            <label for="carte_electeur" class="text-sm font-medium text-gray-900 block mb-2">
                                 Photo du Marié
                             </label>
                             <input
@@ -76,9 +85,22 @@
                                 name="photo_marier"
                                 id="photo_marier"
                                 wire:model="photo_marier"
-                                class="shadow-sm bg-gray-50 border @error('date_mariage') border-red-400 @enderror border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
+                                class="shadow-sm bg-gray-50 border @error('photo_marier') border-red-400 @enderror border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
                                 placeholder="Selectionner la photo du marié"
                                 required="">
+                        </div>
+                        <div class="col-span-6 sm:col-span-3">
+                            <label for="marier_gender" class="text-sm font-medium text-gray-900 block mb-2">
+                                Gender du marier
+                            </label>
+                            <select  name="marier_gender" wire:model="marier_gender" id="marier_gender" class="w-full px-2 py-2 bg-gray-50 border border-gray-300 focus:border-cyan-600 rounded-lg block">
+                                <option value="" selected>Selectionner le genre du marier</option>
+                                @foreach(\App\Concers\GenderEnum::cases() as $key => $gender)
+                                    <option
+                                        value="{{ $gender->value }}"
+                                    >{{ $gender->value }}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -144,7 +166,7 @@
                                 placeholder="Saisir le numero de la piece d'identiter de la marieer"
                                 required="">
                         </div>
-                        <div class="col-span-full">
+                        <div class="col-span-6 sm:col-span-3">
                             <label for="photos_marieer" class="text-sm font-medium text-gray-900 block mb-2">
                                 Photo de la Mariée
                             </label>
@@ -157,6 +179,20 @@
                                 placeholder="Selectionner la photo de la mariee"
                                 required="">
                         </div>
+                        <div class="col-span-6 sm:col-span-3">
+                            <label for="marieer_gender" class="text-sm font-medium text-gray-900 block mb-2">
+                                Gender de la Mariée
+                            </label>
+                            <select  name="marieer_gender" wire:model="marieer_gender" id="marieer_gender" class="w-full px-2 py-2 bg-gray-50 border border-gray-300 focus:border-cyan-600 rounded-lg block">
+                                <option value="" selected>Selectionner le genre du marier</option>
+                                @foreach(\App\Concers\GenderEnum::cases() as $key => $gender)
+                                    <option
+                                        value="{{ $gender->value }}"
+                                    >{{ $gender->value }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -179,7 +215,7 @@
                                 id="date_mariage"
                                 wire:model="date_mariage"
                                 class="shadow-sm @error('date_mariage') border-red-400 @enderror bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
-                                placeholder="S"
+                                placeholder="Date de mariage"
                                 required="">
                         </div>
                     </div>

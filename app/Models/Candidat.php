@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Concers\GenderEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -18,12 +19,14 @@ class Candidat extends Model
         'id_carte_electeur',
         'photos',
         'commune_id',
-        'user_id'
+        'user_id',
+        'gender'
     ];
 
     protected $casts = [
         'date_naissance' => 'date',
-        'id_carte_electeur' => 'integer'
+        'id_carte_electeur' => 'integer',
+        'gender' => GenderEnum::class,
     ];
 
     public function commune(): BelongsTo
@@ -41,13 +44,8 @@ class Candidat extends Model
         return $this->hasOne(Responsable::class);
     }
 
-    public function marier(): HasOne
+    public function mariage(): HasOne
     {
         return $this->hasOne(Mariage::class);
-    }
-
-    public function marierAvec(): HasOne
-    {
-        return $this->hasOne(Mariage::class, 'marier_id');
     }
 }

@@ -1,7 +1,7 @@
 <div>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Bienvenue {{ auth()->user()->name }} | <span class="bg-indigo-500 rounded-full px-3 py-1 text-white">Commune de {{ auth()->user()->commune->name }}</span>
+            Agent <span class="bg-indigo-100 px-4 py-1 rounded">{{ auth()->user()->name }}</span> | <span class="bg-indigo-500 rounded-full px-3 py-1 text-white">Commune de {{ auth()->user()->commune->name }}</span>
         </h2>
     </x-slot>
 
@@ -19,10 +19,16 @@
                         <span class="text-lg text-indigo-400 font-semibold">{{ $result->id_carte_electeur }}</span>
                     </p>
                 </div>
-                <img
-                    src="{{ asset('storage/'.$result->photos) }}"
-                    alt="{{$result->name}}"
-                    class=" size-36 object-cover rounded-full shadow">
+               <div class="flex gap-4">
+                   <img
+                       src="{{ asset('storage/'.$result->photos) }}"
+                       alt="{{$result->name}}"
+                       class=" size-36 object-cover rounded-full shadow">
+                   <img
+                       src="{{ asset('storage/'.$result->photos) }}"
+                       alt="{{$result->name}}"
+                       class=" size-36 object-cover rounded-full shadow">
+               </div>
             </div>
             <div class="border-t border-indigo-200 px-4 py-5 sm:p-0">
                 <dl class="sm:divide-y sm:divide-gray-200">
@@ -31,7 +37,7 @@
                             Nom et Prenom
                         </dt>
                         <dd class="mt-1 text-lg font-semibold text-gray-900 sm:mt-0 sm:col-span-2">
-                            {{ $result->name . " " . $result->prenon }}
+                            {{ $result->name . " " . $result->mari->prenon }}
                         </dd>
                     </div>
                     <div class="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -48,18 +54,6 @@
                         </dt>
                         <dd class="mt-1 text-lg font-semibold text-gray-900 sm:mt-0 sm:col-span-2">
                             {{ $result->id_carte_electeur }}
-                        </dd>
-                    </div>
-                    <div class="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                        <dt class="text-sm font-medium text-gray-500">
-                            Photos
-                        </dt>
-                        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                            <img
-                                src="{{ asset('storage/'.$result->photos) }}"
-                                alt="{{ $result->name }}"
-                                class="size-10 object-cover"
-                            >
                         </dd>
                     </div>
                 </dl>

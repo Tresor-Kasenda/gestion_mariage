@@ -1,12 +1,12 @@
 <div>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Bienvenue {{ auth()->user()->name }} | <span class="bg-indigo-500 rounded-full px-3 py-1 text-white">Commune de {{ auth()->user()->commune->name }}</span>
+            Agent <span class="bg-indigo-100 px-4 py-1 rounded">{{ auth()->user()->name }}</span> | <span class="bg-indigo-500 rounded-full px-3 py-1 text-white">Commune de {{ auth()->user()->commune->name }}</span>
         </h2>
     </x-slot>
 
     @if (session('status'))
-        <div x-data="{ open: true }" x-init="setTimeout(() => open = false, 3000)" x-show="open" class="mt-12 px-4 rounded-md border-l-4 border-green-500 bg-green-50 mx-auto max-w-7xl">
+        <div x-data="{ open: true }" x-init="setTimeout(() => open = false, 5000)" x-show="open" class="mt-12 px-4 rounded-md border-l-4 border-green-500 bg-green-50 mx-auto max-w-7xl">
             <div class="flex justify-between py-3">
                 <div class="flex">
                     <div>

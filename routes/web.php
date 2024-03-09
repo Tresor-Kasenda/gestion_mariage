@@ -29,19 +29,11 @@ Route::view('profile', 'profile')
     ->middleware(['auth'])
     ->name('profile');
 
-Route::get('candidats', ListsCandidats::class)->name('candidats')
-    ->middleware(['auth', 'verified']);
-
-Route::get('candidats/create', AddCandidat::class)->name('candidats.create')
-    ->middleware(['auth','verified']);
-
-Route::get('candidats/{candidat}/detail', ShowCandidat::class)->name('candidat-show')
-    ->middleware(['auth','verified']);
-
-Route::get('users', ListsUsers::class)->name('users')
-    ->middleware(['auth','verified']);
-
-Route::get('users/create', CreateUsers::class)->name('users.create')
-    ->middleware(['auth','verified']);
-
+Route::middleware(['auth'])->group(function () {
+    Route::get('candidats', ListsCandidats::class)->name('candidats');
+    Route::get('candidats/create', AddCandidat::class)->name('candidats.create');
+    Route::get('candidats/{candidat}/detail', ShowCandidat::class)->name('candidat-show');
+    Route::get('users', ListsUsers::class)->name('users');
+    Route::get('users/create', CreateUsers::class)->name('users.create');
+});
 require __DIR__.'/auth.php';

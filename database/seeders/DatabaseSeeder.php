@@ -14,11 +14,6 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             CommuneSeeder::class,
-            UserSeeder::class,
-            CandidatSeeder::class,
-            ResponsableSeeder::class,
-            TemoinSeeder::class,
-            MariageSeeder::class
         ]);
     }
 }

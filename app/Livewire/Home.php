@@ -23,6 +23,7 @@ class Home extends Component
                 ->where('name', 'like', "%{$this->search}%")
                 ->orWhere('prenom', 'like', "%{$this->search}%")
                 ->orWhere('id_carte_electeur', 'like', "%{$this->search}%")
+                ->orderBy('created_at', 'desc')
                 ->paginate(9)
         ]);
     }

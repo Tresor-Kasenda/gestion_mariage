@@ -46,9 +46,6 @@ class ListsCandidats extends Component
         return view('livewire.pages.candidats.lists-candidats');
     }
 
-
-
-
     public function sortBy(string $column): void
     {
         if ($this->sortColumn === $column) {
